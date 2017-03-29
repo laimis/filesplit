@@ -1,3 +1,4 @@
+using System.Linq;
 using Xunit;
 
 namespace Filesplit.Services.Tests
@@ -9,6 +10,11 @@ namespace Filesplit.Services.Tests
         private const string VALID_INPUT_PIPE = "Simutis|Laimonas|Male|Blue|1982/04/22";
         private const string VALID_INPUT_SPACE = "Simutis Laimonas Male Blue 1982/04/22";
         private const string VALID_INPUT_COMMA = "Simutis,Laimonas,Male,Blue,1982/04/22";
+        private const string VALID_INPUT_MULTIPLE = 
+@"Simutis,Laimonas,Male,Blue,1982/04/22
+Bauer,Emily,Female,Blue,2013/06/12
+Bauer,Isabel,Female,Blue,2017/07/29
+";
 
         [Fact]
         public void Add_WithEmptyInput_Fails()
@@ -47,7 +53,7 @@ namespace Filesplit.Services.Tests
         {
             TestIfValidParse(VALID_INPUT_SPACE);
         }
-
+        
         private void TestIfValidParse(string input)
         {
             var service = new RecordService();
@@ -55,6 +61,18 @@ namespace Filesplit.Services.Tests
             var result = service.Add(input);
 
             Assert.True(result, "Adding valid input should succeed");
+        }
+
+        [Fact]
+        public void Add_AddsCorrectNumberOfRecords()
+        {
+            var service = new RecordService();
+
+            service.Add(VALID_INPUT_MULTIPLE);
+
+            var result = service.List();
+
+            Assert.Equal(3, result.Count());
         }
     }
 }

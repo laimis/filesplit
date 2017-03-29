@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Filesplit.Services
@@ -56,6 +57,11 @@ namespace Filesplit.Services
                 FavoriteColor = parts[3],
                 DateOfBirth = parts[4],
             };
+        }
+
+        public IEnumerable<Record> List()
+        {
+            return _records.AsReadOnly();
         }
     }
 }

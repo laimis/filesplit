@@ -1,6 +1,6 @@
 namespace Filesplit.Services
 {
-    internal class Record
+    public class Record
     {
         public string LastName { get; set; }
         public string FirstName { get; set; }

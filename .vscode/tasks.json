@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}\\Filesplit.ConsoleApp\\Filesplit.ConsoleApp.csproj"
+                "${workspaceRoot}\\Filesplit.Services\\Filesplit.Services.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"

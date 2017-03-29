@@ -10,12 +10,12 @@ namespace Filesplit.Services.Tests
         private const string VALID_INPUT_SPACE = "Simutis Laimonas Male Blue 1982/04/22";
         private const string VALID_INPUT_COMMA = "Simutis,Laimonas,Male,Blue,1982/04/22";
 
-        private RecordService Service = new RecordService();
-
         [Fact]
         public void Add_WithEmptyInput_Fails()
         {
-            var result = this.Service.Add(INVALID_INPUT_NULL);
+            var service = new RecordService();
+
+            var result = service.Add(INVALID_INPUT_NULL);
 
             Assert.False(result, "Adding null input should fail");
         }
@@ -23,7 +23,9 @@ namespace Filesplit.Services.Tests
         [Fact]
         public void Add_WithInvalidRecords_Fails()
         {
-            var result = this.Service.Add(INVALID_INPUT_BADFORMAT);
+            var service = new RecordService();
+            
+            var result = service.Add(INVALID_INPUT_BADFORMAT);
 
             Assert.False(result, "Adding invalid input should fail");
         }
@@ -48,7 +50,9 @@ namespace Filesplit.Services.Tests
 
         private void TestIfValidParse(string input)
         {
-            var result = this.Service.Add(input);
+            var service = new RecordService();
+            
+            var result = service.Add(input);
 
             Assert.True(result, "Adding valid input should succeed");
         }

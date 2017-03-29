@@ -15,6 +15,11 @@ namespace Filesplit.Services.Tests
 Bauer,Emily,Female,Blue,2013/06/12
 Bauer,Isabel,Female,Blue,2017/07/29
 ";
+        private const string RECORD_TEST_LAST = "Simutis";
+        private const string RECORD_TEST_FIRST = "Laimonas";
+        private const string RECORD_TEST_GENDER = "Male";
+        private const string RECORD_TEST_COLOR = "Blue";
+        private const string RECORD_TEST_DOB = "1982/04/22";
 
         [Fact]
         public void Add_WithEmptyInput_Fails()
@@ -73,6 +78,24 @@ Bauer,Isabel,Female,Blue,2017/07/29
             var result = service.List();
 
             Assert.Equal(3, result.Count());
+        }
+
+        [Fact]
+        public void Add_CorrectlyParses()
+        {
+            var service = new RecordService();
+
+            service.Add(VALID_INPUT_MULTIPLE);
+
+            var result = service.List();
+
+            var record = result.First();
+
+            Assert.Equal(RECORD_TEST_COLOR, record.FavoriteColor);
+            Assert.Equal(RECORD_TEST_DOB, record.DateOfBirth);
+            Assert.Equal(RECORD_TEST_FIRST, record.FirstName);
+            Assert.Equal(RECORD_TEST_LAST, record.LastName);
+            Assert.Equal(RECORD_TEST_GENDER, record.Gender);
         }
     }
 }

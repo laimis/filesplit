@@ -10,6 +10,8 @@ namespace Filesplit.WebAPI.Controllers
     [Route("[controller]")]
     public class RecordsController : Controller
     {
+        private const string INVALID_DATA = "Invalid input data provided";
+        
         private IRecordService _recordService;
 
         public RecordsController(IRecordService recordService)
@@ -43,7 +45,7 @@ namespace Filesplit.WebAPI.Controllers
             if (!result)
             {
                 this.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                var bytes = System.Text.Encoding.UTF8.GetBytes("Invalid input data provided");
+                var bytes = System.Text.Encoding.UTF8.GetBytes(INVALID_DATA);
                 this.HttpContext.Response.Body.Write(bytes, 0, bytes.Length);
             }
         }

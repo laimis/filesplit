@@ -40,6 +40,7 @@ namespace Filesplit.ConsoleApp
                     r.FavoriteColor, 
                     r.DateOfBirthFormmated);
             }
+            Console.WriteLine();
         }
     }
 }

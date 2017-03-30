@@ -21,11 +21,25 @@ namespace Filesplit.ConsoleApp
             }
 
             // three outputs
-            Console.WriteLine("Ouput 1, sorted by gender:");
+            Output(service, OrderBy.Gender);
 
-            Console.WriteLine("Ouput 2, sorted by DOB (ascending):");
+            Output(service, OrderBy.BirthDate);
 
-            Console.WriteLine("Ouput 3, sorted by last name (descending):");
+            Output(service, OrderBy.LastName);
+        }
+
+        private static void Output(IRecordService service, OrderBy orderBy)
+        {
+            Console.WriteLine("Output sorted by " + orderBy);
+            foreach(var r in service.List(orderBy))
+            {
+                Console.WriteLine("{0},{1},{2},{3},{4}", 
+                    r.FirstName, 
+                    r.LastName, 
+                    r.Gender, 
+                    r.FavoriteColor, 
+                    r.DateOfBirthFormmated);
+            }
         }
     }
 }

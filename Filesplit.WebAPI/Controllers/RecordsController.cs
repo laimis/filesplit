@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Filesplit.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class RecordsController : Controller
     {
         private IRecordService _recordService;

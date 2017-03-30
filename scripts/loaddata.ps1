@@ -1,5 +1,5 @@
 function send-data($data) {
-    $apiUrl = "http://localhost:5000/api/records"
+    $apiUrl = "http://localhost:5000/records"
 
     Invoke-WebRequest -Method POST -ContentType "text/plain" -Body $data $apiUrl
 }

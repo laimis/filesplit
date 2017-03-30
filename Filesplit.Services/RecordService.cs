@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Filesplit.Services
 {
@@ -62,6 +63,11 @@ namespace Filesplit.Services
         public IEnumerable<Record> List()
         {
             return _records.AsReadOnly();
+        }
+
+        public IEnumerable<Record> List(OrderBy order)
+        {
+            return _records.OrderBy(r => r.Gender);
         }
     }
 }

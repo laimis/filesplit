@@ -20,6 +20,7 @@ Bauer,Isabel,Female,Blue,2017/07/29
         private const string RECORD_TEST_GENDER = "Male";
         private const string RECORD_TEST_COLOR = "Blue";
         private const string RECORD_TEST_DOB = "1982/04/22";
+        private const string SORTED_TEST_FIRSTNAME_BY_GENDER = "Emily";
 
         [Fact]
         public void Add_WithEmptyInput_Fails()
@@ -83,9 +84,7 @@ Bauer,Isabel,Female,Blue,2017/07/29
         [Fact]
         public void Add_CorrectlyParses()
         {
-            var service = new RecordService();
-
-            service.Add(VALID_INPUT_MULTIPLE);
+            var service = CreateServiceAndAddRecords();
 
             var result = service.List();
 
@@ -96,6 +95,27 @@ Bauer,Isabel,Female,Blue,2017/07/29
             Assert.Equal(RECORD_TEST_FIRST, record.FirstName);
             Assert.Equal(RECORD_TEST_LAST, record.LastName);
             Assert.Equal(RECORD_TEST_GENDER, record.Gender);
+        }
+
+        private static RecordService CreateServiceAndAddRecords()
+        {
+            var service = new RecordService();
+
+            service.Add(VALID_INPUT_MULTIPLE);
+
+            return service;
+        }
+
+        [Fact]
+        public void List_SortByGender_ReturnsProperOrder()
+        {
+            var service = CreateServiceAndAddRecords();
+
+            var results = service.List(OrderBy.Gender);
+
+            var record = results.First();
+
+            Assert.Equal(SORTED_TEST_FIRSTNAME_BY_GENDER, record.FirstName);
         }
     }
 }

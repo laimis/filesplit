@@ -9,13 +9,14 @@ namespace Filesplit.Services.Tests
         private const string INVALID_INPUT_NULL = null;
         private const string INVALID_INPUT_BADFORMAT = "notoexpstingthis";
         private const string VALID_INPUT_PIPE = "Simutis|Laimonas|Male|Blue|1982/04/22";
-        private const string VALID_INPUT_SPACE = "Simutis Laimonas Male Blue 1982/04/22";
-        private const string VALID_INPUT_COMMA = "Simutis,Laimonas,Male,Blue,1982/04/22";
+        private const string VALID_INPUT_SPACE = "Sumner Emily Female Orange 2000/11/02";
+        private const string VALID_INPUT_COMMA = "Bauer,Isabel,Female,Yellow,2002/07/29";
+
         private const string VALID_INPUT_MULTIPLE = 
-@"Simutis,Laimonas,Male,Blue,1982/04/22
-Simutis,Emily,Female,Blue,2013/06/12
-Bauer,Isabel,Female,Blue,2017/07/29
-";
+            VALID_INPUT_PIPE 
+            + "\r\n" + VALID_INPUT_SPACE
+            + "\r\n" + VALID_INPUT_COMMA;
+
         private const string RECORD_TEST_LAST = "Simutis";
         private const string RECORD_TEST_FIRST = "Laimonas";
         private const string RECORD_TEST_GENDER = "Male";
@@ -23,7 +24,7 @@ Bauer,Isabel,Female,Blue,2017/07/29
         private DateTimeOffset RECORD_TEST_DOB = DateTimeOffset.Parse("04/22/1982");
         private const string SORTED_TEST_FIRSTNAME_BY_GENDER = "Isabel";
         private const string SORTED_TEST_FIRSTNAME_BY_DOB = "Laimonas";
-        private const string SORTED_TEST_FIRSTNAME_BY_LAST = "Laimonas";
+        private const string SORTED_TEST_FIRSTNAME_BY_LAST = "Emily";
 
 
         [Fact]

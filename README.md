@@ -6,7 +6,15 @@ A sample service for parsing text input data. The major components are:
 - Console app - can be used to load data from the console
 - Web API - can be used to load and query data over REST API
 
-Implementation uses .NET Core framework. The framework is needed to compile and run the applications.
+Implementation uses .NET Core framework. The framework is needed to compile and run the applications. If you don't have .NET Core, you can alternatively use docker. DOCKERFILE is provided at the root directory that will allow you to create the docker image and run the container. Example steps:
+
+1. Pull source
+2. Navigate to the root directory in the source
+3. Run docker build . -t filesplitimage
+4. Run docker run -it -p 5000:5000 filesplitimage
+
+At the end you will be in the /app directory which will contain all the filesplit files and you can run the steps below to build/run console and web apps, as well as execute the tests.
+
 
 ## Building and running console app
 

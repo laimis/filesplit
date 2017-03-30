@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Filesplit.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class RecordsController : Controller
     {
         // GET api/values
         [HttpGet]

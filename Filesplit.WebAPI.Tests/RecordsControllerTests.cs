@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using System.Linq;
+using Filesplit.Services;
 using Filesplit.WebAPI.Controllers;
+using Filesplit.WebAPI.OutputModels;
 using Xunit;
 
 namespace Filesplit.WebAPI.Tests
@@ -19,7 +22,9 @@ namespace Filesplit.WebAPI.Tests
         
         public RecordsControllerTests()
         {
-            _controller = new RecordsController();
+            var service = new RecordService();
+
+            _controller = new RecordsController(service);
 
             _controller.Post(INPUT_STRING_ONE);
             _controller.Post(INPUT_STRING_TWO);
@@ -31,7 +36,7 @@ namespace Filesplit.WebAPI.Tests
         {
             var results = _controller.SortedByGender();
 
-            Assert.Equal(FIRST_NAME_ORDERBY_GENDER, results.First().FirstName);
+            AssertCorrectRecordReturned(results, FIRST_NAME_ORDERBY_GENDER);
         }
         
         [Fact]
@@ -39,7 +44,7 @@ namespace Filesplit.WebAPI.Tests
         {
             var results = _controller.SortedByBirthDate();
 
-            Assert.Equal(FIRST_NAME_ORDERBY_DOB, results.First().FirstName);
+            AssertCorrectRecordReturned(results, FIRST_NAME_ORDERBY_DOB);
         }
 
         [Fact]
@@ -47,7 +52,12 @@ namespace Filesplit.WebAPI.Tests
         {
             var results = _controller.SortedByName();
 
-            Assert.Equal(FIRST_NAME_ORDERBY_NAME, results.First().FirstName);
+            AssertCorrectRecordReturned(results, FIRST_NAME_ORDERBY_NAME);
+        }
+
+        private void AssertCorrectRecordReturned(IEnumerable<RecordOutputModel> records, string expected)
+        {
+            Assert.Equal(expected, records.First().FirstName);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Filesplit.Services;
+using Filesplit.WebAPI.OutputModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Filesplit.WebAPI.Controllers
@@ -15,21 +17,20 @@ namespace Filesplit.WebAPI.Controllers
             _recordService = recordService;
         }
         
-        // GET api/values
         [HttpGet("name")]
-        public IEnumerable<object> SortedByName()
+        public IEnumerable<RecordOutputModel> SortedByName()
         {
             return ListAndMap(OrderBy.LastName);
         }
 
         [HttpGet("birthdate")]
-        public IEnumerable<object> SortedByBirthDate()
+        public IEnumerable<RecordOutputModel> SortedByBirthDate()
         {
             return ListAndMap(OrderBy.BirthDate);
         }
 
         [HttpGet("gender")]
-        public IEnumerable<object> SortedByGender()
+        public IEnumerable<RecordOutputModel> SortedByGender()
         {
             return ListAndMap(OrderBy.Gender);
         }
@@ -37,18 +38,25 @@ namespace Filesplit.WebAPI.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
-            this._recordService.Add(value);
+            var result = this._recordService.Add(value);
+
+            if (!result)
+            {
+                this.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                var bytes = System.Text.Encoding.UTF8.GetBytes("Invalid input data provided");
+                this.HttpContext.Response.Body.Write(bytes, 0, bytes.Length);
+            }
         }
 
-        private IEnumerable<object> ListAndMap(OrderBy order)
+        private IEnumerable<RecordOutputModel> ListAndMap(OrderBy order)
         {
             return this._recordService.List(order)
-                .Select(r => new {
-                    lastName = r.LastName,
-                    firstName = r.FirstName,
-                    gender = r.Gender,
-                    color = r.FavoriteColor,
-                    dateOfBirth = r.DateOfBirthFormmated
+                .Select(r => new RecordOutputModel{
+                    LastName = r.LastName,
+                    FirstName = r.FirstName,
+                    Gender = r.Gender,
+                    Color = r.FavoriteColor,
+                    DateOfBirth = r.DateOfBirthFormmated
                 });
         }
     }

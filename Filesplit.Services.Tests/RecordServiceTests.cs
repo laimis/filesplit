@@ -22,7 +22,7 @@ Bauer,Isabel,Female,Blue,2017/07/29
         private const string RECORD_TEST_COLOR = "Blue";
         private DateTimeOffset RECORD_TEST_DOB = DateTimeOffset.Parse("04/22/1982");
         private const string SORTED_TEST_FIRSTNAME_BY_GENDER = "Isabel";
-        private const string SORTED_TEST_FIRSTNAME_BY_BOD = "Laimonas";
+        private const string SORTED_TEST_FIRSTNAME_BY_DOB = "Laimonas";
         private const string SORTED_TEST_FIRSTNAME_BY_LAST = "Laimonas";
 
 
@@ -123,7 +123,7 @@ Bauer,Isabel,Female,Blue,2017/07/29
         }
 
         [Fact]
-        public void List_SortByBOD_ReturnsProperOrder()
+        public void List_SortByDOB_ReturnsProperOrder()
         {
             var service = CreateServiceAndAddRecords();
 
@@ -131,7 +131,7 @@ Bauer,Isabel,Female,Blue,2017/07/29
 
             var records = results.First();
 
-            Assert.Equal(SORTED_TEST_FIRSTNAME_BY_BOD, records.FirstName);
+            Assert.Equal(SORTED_TEST_FIRSTNAME_BY_DOB, records.FirstName);
         }
 
         [Fact]

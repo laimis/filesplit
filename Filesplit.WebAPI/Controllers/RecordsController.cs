@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Filesplit.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,27 +17,39 @@ namespace Filesplit.WebAPI.Controllers
         
         // GET api/values
         [HttpGet("name")]
-        public IEnumerable<Record> SortedByName()
+        public IEnumerable<object> SortedByName()
         {
-            return _recordService.List(OrderBy.LastName);
+            return ListAndMap(OrderBy.LastName);
         }
 
         [HttpGet("birthdate")]
-        public IEnumerable<Record> SortedByBirthDate()
+        public IEnumerable<object> SortedByBirthDate()
         {
-            return _recordService.List(OrderBy.BirthDate);
+            return ListAndMap(OrderBy.BirthDate);
         }
 
         [HttpGet("gender")]
-        public IEnumerable<Record> SortedByGender()
+        public IEnumerable<object> SortedByGender()
         {
-            return _recordService.List(OrderBy.Gender);
+            return ListAndMap(OrderBy.Gender);
         }
 
         [HttpPost]
         public void Post([FromBody]string value)
         {
             this._recordService.Add(value);
+        }
+
+        private IEnumerable<object> ListAndMap(OrderBy order)
+        {
+            return this._recordService.List(order)
+                .Select(r => new {
+                    lastName = r.LastName,
+                    firstName = r.FirstName,
+                    gender = r.Gender,
+                    color = r.FavoriteColor,
+                    dateOfBirth = r.DateOfBirthFormmated
+                });
         }
     }
 }

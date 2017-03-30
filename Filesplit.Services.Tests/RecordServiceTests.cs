@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Xunit;
 
@@ -19,8 +20,11 @@ Bauer,Isabel,Female,Blue,2017/07/29
         private const string RECORD_TEST_FIRST = "Laimonas";
         private const string RECORD_TEST_GENDER = "Male";
         private const string RECORD_TEST_COLOR = "Blue";
-        private const string RECORD_TEST_DOB = "1982/04/22";
+        private DateTimeOffset RECORD_TEST_DOB = DateTimeOffset.Parse("04/22/1982");
         private const string SORTED_TEST_FIRSTNAME_BY_GENDER = "Emily";
+        private const string SORTED_TEST_FIRSTNAME_BY_BOD = "Laimonas";
+        private const string SORTED_TEST_FIRSTNAME_BY_LAST = "Laimonas";
+
 
         [Fact]
         public void Add_WithEmptyInput_Fails()
@@ -116,6 +120,30 @@ Bauer,Isabel,Female,Blue,2017/07/29
             var record = results.First();
 
             Assert.Equal(SORTED_TEST_FIRSTNAME_BY_GENDER, record.FirstName);
+        }
+
+        [Fact]
+        public void List_SortByBOD_ReturnsProperOrder()
+        {
+            var service = CreateServiceAndAddRecords();
+
+            var results = service.List(OrderBy.BirthDate);
+
+            var records = results.First();
+
+            Assert.Equal(SORTED_TEST_FIRSTNAME_BY_BOD, records.FirstName);
+        }
+
+        [Fact]
+        public void List_SortByLastName_ReturnsProperOrder()
+        {
+            var service = CreateServiceAndAddRecords();
+
+            var results = service.List(OrderBy.LastName);
+
+            var records = results.First();
+
+            Assert.Equal(SORTED_TEST_FIRSTNAME_BY_LAST, records.FirstName);
         }
     }
 }

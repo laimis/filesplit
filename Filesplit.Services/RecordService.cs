@@ -56,7 +56,7 @@ namespace Filesplit.Services
                 FirstName = parts[1],
                 Gender = parts[2],
                 FavoriteColor = parts[3],
-                DateOfBirth = parts[4],
+                DateOfBirth = DateTimeOffset.Parse(parts[4]),
             };
         }
 
@@ -67,7 +67,16 @@ namespace Filesplit.Services
 
         public IEnumerable<Record> List(OrderBy order)
         {
-            return _records.OrderBy(r => r.Gender);
+            if (order == OrderBy.Gender)
+            {
+                return _records.OrderBy(r => r.Gender);
+            }
+            else if (order == OrderBy.BirthDate)
+            {
+                return _records.OrderBy(r => r.DateOfBirth);
+            }
+            
+            return _records.OrderByDescending(r => r.LastName);
         }
     }
 }

@@ -11,6 +11,11 @@ namespace Filesplit.WebAPI.Tests
         private const string INPUT_STRING_ONE = "Smith|Jane|Female|Black|04/05/1950";
         private const string INPUT_STRING_TWO = "Doe|Lori|Female|Black|01/21/1990";
         private const string INPUT_STRING_THREE = "Swick|Rob|Male|Black|10/10/2005";
+
+        private const string FIRST_NAME_ORDERBY_GENDER = "Lori";
+        private const string FIRST_NAME_ORDERBY_DOB = "Jane";
+        private const string FIRST_NAME_ORDERBY_NAME = "Rob";
+
         
         public RecordsControllerTests()
         {
@@ -26,7 +31,7 @@ namespace Filesplit.WebAPI.Tests
         {
             var results = _controller.SortedByGender();
 
-            Assert.Equal("Lori", results.First().FirstName);
+            Assert.Equal(FIRST_NAME_ORDERBY_GENDER, results.First().FirstName);
         }
         
         [Fact]
@@ -34,7 +39,7 @@ namespace Filesplit.WebAPI.Tests
         {
             var results = _controller.SortedByBirthDate();
 
-            Assert.Equal("Jane", results.First().FirstName);
+            Assert.Equal(FIRST_NAME_ORDERBY_DOB, results.First().FirstName);
         }
 
         [Fact]
@@ -42,7 +47,7 @@ namespace Filesplit.WebAPI.Tests
         {
             var results = _controller.SortedByName();
 
-            Assert.Equal("Rob", results.First().FirstName);
+            Assert.Equal(FIRST_NAME_ORDERBY_NAME, results.First().FirstName);
         }
     }
 }

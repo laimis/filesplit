@@ -27,3 +27,12 @@ You will need to provide paths to files that contain the data to be loaded. Some
 You will see the localhost URL in the command prompt. You can load some sample data into the API by running a powershell script located in /scripts directory.
 
 To query the records, navigate to /api/records/gender, /api/records/birthdate, /api/records/name endpoints.
+
+## Running tests
+
+1. Pull source
+2. Navigate to Filesplit.Services.Tests
+3. Run dotnet restore
+4. Run dotnet test
+
+You will see xunit style output of the tests. There are also tests for Web API, those can be located in Filesplit.WebAPI.Tests directory. Use the same, dotnet restore / dotnet test sequence to run them after you navigate to that directory.

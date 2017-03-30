@@ -13,7 +13,7 @@ namespace Filesplit.Services.Tests
         private const string VALID_INPUT_COMMA = "Simutis,Laimonas,Male,Blue,1982/04/22";
         private const string VALID_INPUT_MULTIPLE = 
 @"Simutis,Laimonas,Male,Blue,1982/04/22
-Bauer,Emily,Female,Blue,2013/06/12
+Simutis,Emily,Female,Blue,2013/06/12
 Bauer,Isabel,Female,Blue,2017/07/29
 ";
         private const string RECORD_TEST_LAST = "Simutis";
@@ -21,7 +21,7 @@ Bauer,Isabel,Female,Blue,2017/07/29
         private const string RECORD_TEST_GENDER = "Male";
         private const string RECORD_TEST_COLOR = "Blue";
         private DateTimeOffset RECORD_TEST_DOB = DateTimeOffset.Parse("04/22/1982");
-        private const string SORTED_TEST_FIRSTNAME_BY_GENDER = "Emily";
+        private const string SORTED_TEST_FIRSTNAME_BY_GENDER = "Isabel";
         private const string SORTED_TEST_FIRSTNAME_BY_BOD = "Laimonas";
         private const string SORTED_TEST_FIRSTNAME_BY_LAST = "Laimonas";
 

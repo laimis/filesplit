@@ -69,7 +69,9 @@ namespace Filesplit.Services
         {
             if (order == OrderBy.Gender)
             {
-                return _records.OrderBy(r => r.Gender);
+                return _records
+                    .OrderBy(r => r.Gender)
+                    .ThenBy(r => r.LastName);
             }
             else if (order == OrderBy.BirthDate)
             {

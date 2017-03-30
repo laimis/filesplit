@@ -7,8 +7,12 @@ namespace Filesplit.WebAPI.Controllers
     [Route("api/[controller]")]
     public class RecordsController : Controller
     {
-        // usually this would use DI
-        private IRecordService _recordService = new RecordService();
+        private IRecordService _recordService;
+
+        public RecordsController(IRecordService recordService)
+        {
+            _recordService = recordService;
+        }
         
         // GET api/values
         [HttpGet("name")]

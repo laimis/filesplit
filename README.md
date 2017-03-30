@@ -17,6 +17,10 @@ Implementation uses .NET Core framework. The framework is needed to compile and 
 
 You will need to provide paths to files that contain the data to be loaded. Some sample data files are provided in data directory.
 
+Example run:
+
+  dotnet run ../data/test_file_pipes.txt ../data/test_file_commas.txt ../data/test_file_spaces.txt 
+
 ## Building and running web app
 
 1. Pull source
